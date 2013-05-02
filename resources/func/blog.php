@@ -4,18 +4,22 @@ function add_post($title, $contents, $category) {
     
 }
 
-function edit_posts($id, $title, $contents, $category) {
+function edit_post($id, $title, $contents, $category) {
     
 }
 
 function add_category($name) {
     $name = mysql_real_escape_string($name);
-    
-    mysql_query("INSERT INTO `categories` SET `name` = '{$name}''");
+            
+    mysql_query("INSERT INTO `categories` SET `name` = '{$name}'");
 }
 
 function delete($field, $id) {
+    $table = mysql_real_escape_string($table);
+    $id    = (int) $id;
     
+    
+    mysql_query("DELETE FORM `{$table}` WHERE `id` = {$id}");
 }
 
 function get_posts($id = null, $cat_id = null) {

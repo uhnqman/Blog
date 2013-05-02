@@ -9,9 +9,9 @@ if (isset($_POST['name'])) {
     }else if (category_exists($name)) {
         $error = "That category already exists.";
     }else if (strlen($name) > 24) {
-        $error = "Category name can only use 24 characters.";
+        $error = "Category names can only use up to 24 characters.";
     }   
-    if (! isset($error)) {
+    if ( ! isset($error)) { 
         add_category($name);
     }
 }
@@ -21,7 +21,7 @@ if (isset($_POST['name'])) {
 ?>
 <DOCTYPE html>
     
-<html lang ="eng">
+<html lang="eng">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -29,9 +29,9 @@ if (isset($_POST['name'])) {
         
         <title> Add a category </title>
     </head>
-    
+        
     <body>
-        <h1> Add a category </h1>
+        <h1> Add a Category </h1>
         
         <?php 
         if (isset($error)) {
