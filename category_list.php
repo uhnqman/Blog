@@ -9,7 +9,7 @@ include_once('resources/sqlCode/init.php');
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
          
         
-        <title> Category List </title> 
+<title> Category List </title> 
     </head>      
     <body>
         <?php

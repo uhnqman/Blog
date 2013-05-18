@@ -1,6 +1,8 @@
 <?php
 include_once ('resources/sqlCode/init.php');
 
+$post = get_posts($_GET['id']);
+
 if ( isset($_POST['title'], $_POST['contents'], $_POST['category'])) {
     $errors = array();
     
@@ -20,18 +22,16 @@ if ( isset($_POST['title'], $_POST['contents'], $_POST['category'])) {
         $errors[] = 'That category does not exist.';
     }
     if( empty($errors)) {
-        add_post($title, $contents, $_POST['category']); 
-        
-        $id = mysql_insert_id();
+        edit_post($_GET['id'], $title, $contents, $_POST['category']); 
         
         
-        header("Location: index.php?id={$id}");
+        header("Location: index.php?id={$post[0]['post_id']}");
         die();
     }
 } 
 ?>
-
 <DOCTYPE html>
+    
     
 <html lang="eng">
     <head>
@@ -42,46 +42,46 @@ if ( isset($_POST['title'], $_POST['contents'], $_POST['category'])) {
             label { display:block }
             </style>
         
-        <title> Add a Post </title>
+        <title> Edit a Post </title>
     </head>
         
     <body>
-        <h1> Add a Post </h1>
+        <h1> Edit a Post </h1>
         
         <?php
         if (isset($errors) &&  ! empty($errors)) {
             echo '<ul><li>',  implode('</li><li>', $errors),'</li></ul>';
         }
         ?>
-       
-        
         
         <form action="" method="post">
             <div>
                 <label for ="title"> Title </label>
-                <input type ="text" name="title" value ="<?php if(isset($_POST['title'])) echo $_POST['title']; ?>">
+                <input type ="text" name="title" value ="<?php echo $post[0]['title'];?>">
             </div>
             <div>
                 <label for ="contents"> Contents</label>
-                <textarea name="contents" rows="15" cols="50"><?php if(isset($_POST['contents'])) echo $_POST['contents']; ?></textarea>
+                <textarea name="contents" rows="15" cols="50"><?php echo $post[0]['contents'];?></textarea>
                 
             </div>
             <div>
                 <label for="category"> Category </label>
                 <select name="category">
-                  <?php
+                   <?php
                   foreach (get_categories() as $category) {
-                  
-                     ?> 
-                    <option value="<?php echo $category['id']; ?>"> <?php echo $category['name'];?> </option>
-                  <?php    
-                  }
-                   
-                  ?>
+                      $selected = ( $category['name'] == $post[0]['name'] ) ? ' selected' : '';
+                     
+                     ?>
+                    
+                    <option value="<?php echo $category['id']; ?>" <?php echo $selected; ?>> <?php echo $category['name'];?> </option>
+                    
+                      <?php
+                      }
+                      ?>
                 </select>
             </div>
             <div>
-                <input type="submit" value="Add Post">
+                <input type="submit" value="Edit Post">
                 
             </div>
         </form>

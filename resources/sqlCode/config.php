@@ -1,12 +1,8 @@
 <?php
 
-$config['db_host'] = 'localhost';
-$config['db_user'] = 'root';
-$config['db_pass'] = '';
-$config['db_name'] = 'blog';
+define('DB_USER','root');
+define('DB_PASSWORD','');
+define('DB_DATABASE','blog');
+define('DB_HOST','localhost');
 
-
-foreach($config as $k => $v) {
-    define(strtoupper($k), $v);
-}
 ?>

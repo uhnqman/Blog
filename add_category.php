@@ -6,20 +6,23 @@ if (isset($_POST['name'])) {
     
     if (empty($name)) {
         $error = "You must submit a category name.";
-    }else if (category_exists($name)) {
+    }else if (category_exists('name', $name)) {
         $error = "That category already exists.";
     }else if (strlen($name) > 24) {
         $error = "Category names can only use up to 24 characters.";
     }   
     if ( ! isset($error)) { 
         add_category($name);
+        
+        header("Location: add_post.php");
+        die();
     }
 }
 
-    
-    
+   
+  
 ?>
-<DOCTYPE html>
+<!DOCTYPE html>
     
 <html lang="eng">
     <head>
